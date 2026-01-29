@@ -1,0 +1,38 @@
+/* src/components/JobCard.css */
+
+.job-card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 16px;
+  width: 260px;
+  margin: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+  background-color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.job-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.job-card h3 {
+  margin: 0 0 6px 0;
+  font-size: 18px;
+  color: #111827;
+}
+
+.job-card p {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #374151;
+}
+
+.job-card .status-badge {
+  margin-top: 6px;
+  align-self: flex-start;
+}
