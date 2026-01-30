@@ -1,14 +1,45 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function AddJobForm({onAddJob}) {
+function AddJobForm({ onAddJob, onUpdateJob, editingJob }) {
   const [company, setCompany] = useState("");
   const [role, setRole] = useState("");
   const [status, setStatus] = useState("Applied");
   const [dateApplied, setDateApplied] = useState("");
 
+  useEffect(() => {
+    if (editingJob) {
+      setCompany(editingJob.company);
+      setRole(editingJob.role);
+      setStatus(editingJob.status);
+      setDateApplied(editingJob.dateApplied);
+    } else {
+      // Optional: reset form if not editing
+      setCompany("");
+      setRole("");
+      setStatus("Applied");
+      setDateApplied("");
+    }
+  }, [editingJob]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddJob({ company, role, status, dateApplied });
+
+    if (editingJob) {
+      onUpdateJob({
+        ...editingJob,
+        company,
+        role,
+        status,
+        dateApplied,
+      });
+    } else {
+      onAddJob({
+        company,
+        role,
+        status,
+        dateApplied,
+      });
+    }
   };
 
   return (

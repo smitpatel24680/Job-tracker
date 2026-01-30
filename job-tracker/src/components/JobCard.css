@@ -15,6 +15,12 @@
   justify-content: space-between;
 }
 
+.job-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .job-card:hover {
   transform: scale(1.03);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
@@ -36,3 +42,36 @@
   margin-top: 6px;
   align-self: flex-start;
 }
+
+.delete-btn {
+  margin-top: 12px;
+  padding: 6px 10px;
+  font-size: 13px;
+  border: none;
+  border-radius: 6px;
+  background-color: #fee2e2;
+  color: #991b1b;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #fecaca;
+}
+
+
+.edit-btn {
+  margin-top: 8px;
+  margin-right: 8px;
+  padding: 6px 10px;
+  font-size: 13px;
+  border: none;
+  border-radius: 6px;
+  background-color: #e0f2fe;
+  color: #0369a1;
+  cursor: pointer;
+}
+
+.edit-btn:hover {
+  background-color: #bae6fd;
+}
+

@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 function Dashboard() {
   const [showForm, setShowForm] = useState(false);
 
+  const [editingJob, setEditingJob] = useState(null);
+
   const [jobs, setJobs] = useState(() => {
     const savedJobs = localStorage.getItem("jobs");
     return savedJobs ? JSON.parse(savedJobs) : [];
@@ -14,23 +16,53 @@ function Dashboard() {
     setJobs((prev) => [...prev, { ...job, id: Date.now() }]);
   };
 
+  const handleDeleteJob = (id) => {
+    setJobs((prevJobs) => prevJobs.filter((job) => job.id !== id));
+  };
+
+  const handleEditJob = (job) => {
+    setEditingJob(job);
+    setShowForm(true);
+  };
+
+  const handleUpdateJob = (updatedJob) => {
+    setJobs((prev) =>
+      prev.map((job) => (job.id === updatedJob.id ? updatedJob : job)),
+    );
+
+    setEditingJob(null);
+    setShowForm(false);
+  };
+
   useEffect(() => {
     localStorage.setItem("jobs", JSON.stringify(jobs));
   }, [jobs]);
 
-  
   return (
     <div className="dashboard">
       <h1>Job Applications</h1>
 
       <button onClick={() => setShowForm(!showForm)}>+ Add Application</button>
 
-      {showForm && <AddJobForm onAddJob={addJob} />}
+      {showForm && (
+        <AddJobForm
+          onAddJob={addJob}
+          onUpdateJob={handleUpdateJob}
+          editingJob={editingJob}
+        />
+      )}
 
       {jobs.length == 0 ? (
         <p>No job applications found.</p>
       ) : (
-        jobs.map((job) => <JobCard key={job.id} job={job} />)
+        jobs.map((job) => (
+          <JobCard
+            key={job.id}
+            job={job}
+            onDelete={handleDeleteJob}
+            onEdit={handleEditJob}
+          />
+        ))
       )}
     </div>
   );
